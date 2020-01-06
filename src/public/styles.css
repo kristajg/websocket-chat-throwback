@@ -1,0 +1,99 @@
+body {
+  margin: 0 auto;
+  background-color: #ffdab9;
+  font-family: 'Kulim Park', sans-serif;
+  color: #00003f;
+}
+
+.center {
+  text-align: center;
+}
+
+.button {
+  cursor: pointer;
+  background-color: #b9bbff;
+  border: 2px solid #00003f;
+  border-radius: 2px;
+  padding: 8px 24px;
+  display: inline-block;
+  font-size: 14px;
+  color: #00003f;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.button:hover {
+  opacity: .9;
+}
+
+.dimguy {
+  width: 140px;
+  height: auto;
+}
+
+.dimguy-send {
+  width: 60px;
+  height: auto;
+}
+
+.status-container {
+  margin: 0 auto;
+  max-width: 50%;
+  padding: 8px 24px;
+  border: 2px solid #00003f;
+  border-radius: 2px;
+}
+
+#connection-init {
+  font-size: 22px;
+  margin-top: 48px;
+  font-weight: 700;
+}
+
+#chat-container {
+  display: none;
+  margin: 24px 24px;
+  padding: 8px 24px;
+  border: 2px solid #00003f;
+  border-radius: 2px;
+}
+
+#friend-list {
+  float: left;
+  width: 25%;
+  padding: 8px 24px;
+  margin-right: 24px;
+  border: 2px solid #00003f;
+  border-radius: 2px;
+}
+
+#chat-area {
+  display: inline-block;
+  width: 60%;
+  padding: 8px 24px 48px 8px;
+  border: 2px solid #00003f;
+  border-radius: 2px;
+}
+
+#outgoing-message {
+  display: block;
+  margin-bottom: 8px;
+  width: 100%;
+  height: 150px;
+}
+
+#messages {
+  border: 2px solid #00003f;
+  border-radius: 2px;
+  padding: 8px;
+  background-color: #b9bbff;
+  min-height: 150px;
+  max-height: 150px;
+  overflow-y: scroll;
+}
+
+.disconnect-wrapper {
+  text-align: right;
+  margin-top: 24px;
+  margin-right: 16px;
+}

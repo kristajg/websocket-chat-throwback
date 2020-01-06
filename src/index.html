@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+      <title>WebSocket Demo</title>
+      <link href="https://fonts.googleapis.com/css?family=Kulim+Park|Roboto&display=swap" rel="stylesheet">
+      <script src="public/websockets.js"></script>
+      <link rel="stylesheet" href="public/styles.css">
+  </head>
+  <body>
+    <div>
+      <h2 class="center">Websocket Demo</h2>
+
+      <!-- WEBSOCKET STATUS OUTPUT -->
+      <div class="center status-container">
+        <span><b>Websocket Status:</b></span>
+        <span id="status">Waiting to connect</span>
+      </div>
+
+      <!-- INITIALIZE WEBSOCKET SERVER CONNECTION -->
+      <div id="connection-init" class="center">
+        <p>
+          Welcome to Duhmerican Instant Messenger, or DIM.
+        </p>
+        <div class="center">
+          <img src="public/dim_guy.png" alt="Dim Guy" class="dimguy" />
+        </div>
+        <p>
+          Would you like to connect and chat?
+        </p>
+        <div class="button" onclick={connectToWebsocketServer()}>
+          Connect to Messenger
+        </div>
+      </div>
+
+      <!-- CHAT WITH FRIENDS ONCE SERVER IS CONNECTED -->
+      <div id="chat-container">
+        <h2>DIM Online</h2>
+        <div id="friend-list">
+          <h3>All Friends</h3>
+          <ul>
+            <li>beans4dinner2004</li>
+            <li>xxXsparklekweenXxx</li>
+            <li>yourCrushTeehee</li>
+          </ul>
+        </div>
+        <div id="chat-area">
+          <h3>Chat History</h3>
+          <div id="messages"></div>
+          <h3>Send Message to beans4dinner2004</h3>
+          <textarea id="outgoing-message"></textarea>
+          <div class="button" onclick="sendMessageToFriend('beans4dinner2004')">
+            Send
+          </div>
+        </div>
+        <div class="disconnect-wrapper">
+          <div class="button" onclick={closeConnection()}>Disconnect</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
