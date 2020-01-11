@@ -57,5 +57,5 @@ app.get('/', (req, res) => {
 
 app.listen(appPort, () => {
   console.log(`HTML app server listening on port ${appPort}`);
-  open(`http://localhost:${appPort}`);
+  // open(`http://localhost:${appPort}`);
 });
