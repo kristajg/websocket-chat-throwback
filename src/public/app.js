@@ -17,11 +17,41 @@ var app = new Vue({
         userName: 'yourCrushTeehee',
       },
     ],
-    messages: [],
+    allChats: [],
   },
   methods: {
     addMessageToChat: function(name, text) {
-      this.messages.push({ name, text });
+      let chatHistory = this.allChats.find(chat => chat.userName === name);
+      const myChat = {
+        name: 'me',
+        text: this.outgoingMessage,
+        timeStamp: new Date(),
+      };
+      const theirChat = {
+        name,
+        text,
+        timeStamp: new Date(),
+      };
+
+      if (chatHistory !== undefined) {
+        // Add to the chat history for this friend
+        chatHistory.messages.push(myChat);
+        chatHistory.messages.push(theirChat);
+        let chatIndex = this.allChats.findIndex(chat => chat.userName === name);
+        this.allChats[chatIndex] = chatHistory
+      } else {
+        // No chat history exists for this friend, create one
+        this.allChats.push({
+          userName: name,
+          messages: [
+            myChat,
+            theirChat,
+          ],
+        });
+      }
+
+      // clear textarea
+      this.outgoingMessage = '';
     },
     connectToWebsocketServer: function() {
       // TODO: put this in env file
@@ -53,23 +83,12 @@ var app = new Vue({
       };
     },
     sendMessageToFriend: function () {
-      // Get and send the message to the websocket server
-      // this.ws.send(this.outgoingMessage);
-
       const message = {
         message: this.outgoingMessage,
         friend: this.currentFriend,
       };
       const messageBlob = new Blob([JSON.stringify(message)], {type : 'application/json'});
-      this.ws.send(messageBlob);
-
-    
-      // display message in chat history
-      this.addMessageToChat('me', this.outgoingMessage);
-    
-      // clear textarea
-      this.outgoingMessage = '';
-  
+      this.ws.send(messageBlob);  
     },
     changeCurrentFriend: function (e) {
       this.currentFriend = e.target.innerText;
@@ -78,5 +97,11 @@ var app = new Vue({
       this.ws.close();
       this.notConnected = true;
     }
-  }
+  },
+  computed: {
+    getChatMessageHistory: function () {
+      let chatHistory = this.allChats.find(chat => chat.userName === this.currentFriend);
+      return chatHistory !== undefined ? chatHistory.messages : [];
+    },
+  },
 });

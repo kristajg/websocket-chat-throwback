@@ -44,12 +44,10 @@
         </div>
         <div id="chat-area">
           <h3>Chat History</h3>
-          <div id="messages">
-            <span v-if="messages">
-              <div v-for="message of messages">
-                {{ message.name }}: {{ message.text }}
-              </div>
-            </span>
+          <div v-if="allChats.length" id="messages">
+            <div v-for="message in getChatMessageHistory">
+              {{ message.name }}: {{ message.text }}
+            </div>
           </div>
           <h3>Send Message to {{ currentFriend }}</h3>
           <textarea v-model="outgoingMessage" id="outgoing-message"></textarea>
