@@ -5,6 +5,7 @@ var app = new Vue({
     status: 'Waiting to connect',
     notConnected: true,
     outgoingMessage: '',
+    currentFriend: 'beans4dinner2004',
     friends: [
       {
         userName: 'beans4dinner2004'
@@ -35,7 +36,7 @@ var app = new Vue({
 
       this.ws.onmessage = e => {
         // TODO: update message with dynamic data
-        this.addMessageToChat('beans4dinner2004', e.data);
+        this.addMessageToChat(this.currentFriend, e.data);
       };
 
       this.ws.onclose = function() {
@@ -51,27 +52,27 @@ var app = new Vue({
         console.log("Connection failed due to error ", event.type);
       };
     },
-    sendMessageToFriend: function (friend) {
+    sendMessageToFriend: function () {
       // Get and send the message to the websocket server
-      // const message = document.getElementById("outgoing-message").value;
-      this.ws.send(this.outgoingMessage);
+      // this.ws.send(this.outgoingMessage);
+
+      const message = {
+        message: this.outgoingMessage,
+        friend: this.currentFriend,
+      };
+      const messageBlob = new Blob([JSON.stringify(message)], {type : 'application/json'});
+      this.ws.send(messageBlob);
+
     
       // display message in chat history
       this.addMessageToChat('me', this.outgoingMessage);
     
       // clear textarea
       this.outgoingMessage = '';
-    
-      // TODO: send blob with friend data to server
-      // can only send string, weird array, blob to websocket...
-      // const message = {
-      //   message: messageToSend,
-      //   friend,
-      // };
-    
-      // Should make this a utils function
-      // const blob = new Blob([JSON.stringify(message)], {type : 'application/json'});
-      // ws.send(blob);
+  
+    },
+    changeCurrentFriend: function (e) {
+      this.currentFriend = e.target.innerText;
     },
     closeConnection: function () {
       this.ws.close();

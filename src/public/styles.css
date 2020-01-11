@@ -66,6 +66,10 @@ body {
   border-radius: 2px;
 }
 
+li#friend {
+  cursor: pointer;
+}
+
 #chat-area {
   display: inline-block;
   width: 60%;

@@ -37,7 +37,9 @@
         <div id="friend-list">
           <h3>All Friends</h3>
           <ul>
-            <li v-for="friend in friends">{{ friend.userName }}</li>
+            <li v-for="friend in friends" v-on:click="changeCurrentFriend" id="friend">
+              {{ friend.userName }}
+            </li>
           </ul>
         </div>
         <div id="chat-area">
@@ -49,9 +51,9 @@
               </div>
             </span>
           </div>
-          <h3>Send Message to beans4dinner2004</h3>
+          <h3>Send Message to {{ currentFriend }}</h3>
           <textarea v-model="outgoingMessage" id="outgoing-message"></textarea>
-          <div class="button" v-on:click="sendMessageToFriend('beans4dinner2004')">
+          <div class="button" v-on:click="sendMessageToFriend">
             Send
           </div>
         </div>

@@ -26,17 +26,16 @@ wss.on('connection', function connection(ws) {
 
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
+    try {
+      const parsedMessage = JSON.parse(message);
+      const friendMessages = chatData.friends[parsedMessage.friend].messages;
 
-    // TODO: get message for friend passed in message dynamically
-    let temporaryMessages = chatData.friends.beans4dinner2004.messages;
-    // TODO: Custom code for chat...getting a blob & parsing out data
-    // console.log('ws data... ', ws.data);
-    // let parsedMessage = JSON.parse(message);
-    // console.log('parsed json is ', parsedMessage);
-
-    // TODO: integrate some natural language processes here to have a more appropriate response
-    let randomizedIndex = Math.floor(Math.random() * temporaryMessages.length) + 0
-    ws.send(temporaryMessages[randomizedIndex]);
+      // TODO: integrate some natural language processes here to have a more appropriate response
+      const randomizedIndex = Math.floor(Math.random() * friendMessages.length) + 0
+      ws.send(friendMessages[randomizedIndex]);
+    } catch (err) {
+      console.log('Error on incoming chat message: ', err);
+    }
   });
 });
 
